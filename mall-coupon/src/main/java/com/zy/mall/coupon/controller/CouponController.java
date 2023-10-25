@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import com.zy.mall.coupon.entity.CouponEntity;
@@ -22,9 +24,21 @@ import com.zy.common.utils.R;
  */
 @RestController
 @RequestMapping("coupon/coupon")
+@RefreshScope
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @Value("${coupon.user.name}")
+    private String name;
+
+    @Value("${coupon.user.age}")
+    private String age;
+
+    @GetMapping("/test/nacosConfig")
+    public R testNacosConfig(){
+        return R.ok().put("name", name).put("age", age);
+    }
 
     /**
      * 测试远程调用信息
