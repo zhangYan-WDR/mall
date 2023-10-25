@@ -25,7 +25,7 @@ import com.zy.common.utils.R;
  * @date 2023-10-25 21:02:45
  */
 @RestController
-@RequestMapping("coupon/integrationchangehistory")
+@RequestMapping("member/integrationchangehistory")
 public class IntegrationChangeHistoryController {
     @Autowired
     private IntegrationChangeHistoryService integrationChangeHistoryService;

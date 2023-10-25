@@ -25,7 +25,7 @@ import com.zy.common.utils.R;
  * @date 2023-10-25 21:02:45
  */
 @RestController
-@RequestMapping("coupon/memberloginlog")
+@RequestMapping("member/memberloginlog")
 public class MemberLoginLogController {
     @Autowired
     private MemberLoginLogService memberLoginLogService;

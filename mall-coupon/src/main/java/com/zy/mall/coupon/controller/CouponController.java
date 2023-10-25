@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.zy.mall.coupon.entity.CouponEntity;
 import com.zy.mall.coupon.service.CouponService;
@@ -29,6 +25,17 @@ import com.zy.common.utils.R;
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    /**
+     * 测试远程调用信息
+     */
+    @RequestMapping(value = "/member/list",method = RequestMethod.GET)
+    public R memberCoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100减10");
+        return R.ok().put("coupon", couponEntity);
+    }
+
 
     /**
      * 列表

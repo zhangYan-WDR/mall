@@ -25,7 +25,7 @@ import com.zy.common.utils.R;
  * @date 2023-10-25 21:04:27
  */
 @RestController
-@RequestMapping("coupon/wareordertask")
+@RequestMapping("ware/wareordertask")
 public class WareOrderTaskController {
     @Autowired
     private WareOrderTaskService wareOrderTaskService;

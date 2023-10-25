@@ -3,13 +3,10 @@ package com.zy.mall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.zy.mall.member.feign.CouponFeignService;
 import com.zy.mall.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.zy.mall.member.entity.MemberEntity;
 import com.zy.common.utils.PageUtils;
@@ -25,10 +22,23 @@ import com.zy.common.utils.R;
  * @date 2023-10-25 21:02:45
  */
 @RestController
-@RequestMapping("coupon/member")
+@RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CouponFeignService couponFeignService;
+
+    /**
+     * 测试远程调用信息
+     */
+    @RequestMapping(value = "/coupons",method = RequestMethod.GET)
+    public R getCouponsInfo(){
+        return couponFeignService.memberCoupons();
+    }
+
+
 
     /**
      * 列表
