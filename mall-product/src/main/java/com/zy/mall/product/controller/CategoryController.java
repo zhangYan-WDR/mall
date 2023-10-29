@@ -1,6 +1,7 @@
 package com.zy.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,16 @@ public class CategoryController {
         PageUtils page = categoryService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 查商品列表的树形结构
+     */
+    @RequestMapping("/list/tree")
+    public R list(){
+        List<CategoryEntity> categoryEntityList = categoryService.listWithTree();
+
+        return R.ok().put("data", categoryEntityList);
     }
 
 
