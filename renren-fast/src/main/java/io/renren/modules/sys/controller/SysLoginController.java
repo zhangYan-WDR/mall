@@ -44,7 +44,7 @@ public class SysLoginController extends AbstractController {
 	private SysCaptchaService sysCaptchaService;
 
 	/**
-	 * 验证码
+	 * 获取登录验证码
 	 */
 	@GetMapping("captcha.jpg")
 	public void captcha(HttpServletResponse response, String uuid)throws IOException {
