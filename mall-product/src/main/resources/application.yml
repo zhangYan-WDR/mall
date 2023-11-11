@@ -23,6 +23,11 @@ mybatis-plus:
 server:
   port: 11000
 
+oss:
+  AccessKeyID: LTAI5tPWYrjKxnRV9hH52E7m
+  AccessKeySecret: pnfJBuDANRyVMJULPqSqzbeeogm903
+  bucketName: zy-mall-shopping
+
 logging:
   level:
     com.zy.mall: debug
