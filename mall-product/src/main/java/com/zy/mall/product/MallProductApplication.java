@@ -18,6 +18,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  *          2）、告诉MyBatis-Plus，sql映射文件位置
  *          mybatis-plus:
  *          mapper-locations: classpath:mapper/*.xml
+ *
+ *
+ *  3.jsr303
  */
 @SpringBootApplication
 @MapperScan("com.zy.mall.product.dao")

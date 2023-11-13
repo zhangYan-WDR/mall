@@ -12,6 +12,7 @@ import com.aliyun.oss.model.PolicyConditions;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
 import com.aliyuncs.exceptions.ClientException;
+import com.zy.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +46,7 @@ public class OssController {
     private String accessId;
 
     @RequestMapping("/oss/policy")
-    public Map<String, String> policy() throws ClientException {
+    public R policy() throws ClientException {
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
         EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
         // 填写Host名称，格式为https://bucketname.endpoint。
@@ -89,12 +90,12 @@ public class OssController {
         } finally {
             ossClient.shutdown();
         }
-        return respMap;
+        return R.ok().put("data", respMap);
     }
 
 
     @PostMapping("/upload/file")
-    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException, ClientException {
+    public R uploadFile(@RequestParam("file") MultipartFile file) throws IOException, ClientException {
         // 填写Bucket名称，例如examplebucket。
         String bucketName = bucket;
         // 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。
@@ -115,23 +116,23 @@ public class OssController {
             // 上传字符串。
             PutObjectResult result = ossClient.putObject(putObjectRequest);
         } catch (OSSException oe) {
-            System.out.println("Caught an OSSException, which means your request made it to OSS, "
+            log.info("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");
-            System.out.println("Error Message:" + oe.getErrorMessage());
-            System.out.println("Error Code:" + oe.getErrorCode());
-            System.out.println("Request ID:" + oe.getRequestId());
-            System.out.println("Host ID:" + oe.getHostId());
+            log.info("Error Message:" + oe.getErrorMessage());
+            log.info("Error Code:" + oe.getErrorCode());
+            log.info("Request ID:" + oe.getRequestId());
+            log.info("Host ID:" + oe.getHostId());
         } catch (Exception ce) {
-            System.out.println("Caught an ClientException, which means the client encountered "
+            log.info("Caught an ClientException, which means the client encountered "
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
-            System.out.println("Error Message:" + ce.getMessage());
+            log.info("Error Message:" + ce.getMessage());
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
         }
-        return url;
+        return R.ok().put("url", url);
     }
 
 
