@@ -1,5 +1,6 @@
 package com.zy.mall.product.exception;
 
+import com.zy.common.exception.BizCodeEnum;
 import com.zy.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -18,13 +19,17 @@ import java.util.Map;
 public class MallExceptionControllerAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public R handleVaildException(MethodArgumentNotValidException e){
+    public R handleVaildException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
         Map<String, String> errorMap = new HashMap<>();
-        bindingResult.getFieldErrors().forEach((filedError)->{
+        bindingResult.getFieldErrors().forEach((filedError) -> {
             errorMap.put(filedError.getField(), filedError.getDefaultMessage());
         });
-        return R.error(400,"参数校验失败").put("data",errorMap);
+        return R.error(BizCodeEnum.VALID_EXCEPTION.getCode(), BizCodeEnum.VALID_EXCEPTION.getMessage()).put("data", errorMap);
     }
 
+    @ExceptionHandler(value = Throwable.class)
+    public R handleException(Throwable throwable) {
+        return R.error(BizCodeEnum.UNKNOW_EXCEPTION.getCode(), BizCodeEnum.UNKNOW_EXCEPTION.getMessage());
+    }
 }
