@@ -11,7 +11,7 @@ package com.zy.common.validator.group;
 /**
  * 腾讯云
  *
- * @author Mark sunlightcs@gmail.com
+ * @author zhangyan zhangyan080817@gmail.com
  */
 public interface QcloudGroup {
 }

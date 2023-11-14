@@ -3,7 +3,10 @@ package com.zy.mall.product.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.zy.common.validator.group.AddGroup;
+import com.zy.common.validator.group.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +59,12 @@ public class BrandController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@Valid @RequestBody BrandEntity brand){
+    /**
+     * Validated和Valid注解的区别是Validated可以进行分组校验
+     * 并且分组校验指定了之后，只有在指定的分组才会失效
+     * 如果controller没有指定分组则实体类里面指定了分组的字段校验都不生效了
+     */
+    public R save(@Validated(value = {UpdateGroup.class}) @RequestBody BrandEntity brand){
 		brandService.save(brand);
 
         return R.ok();

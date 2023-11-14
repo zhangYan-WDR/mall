@@ -6,6 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.zy.common.validator.group.AddGroup;
+import com.zy.common.validator.group.ListValue;
+import com.zy.common.validator.group.UpdateGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -37,7 +41,7 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 品牌logo地址
 	 */
-	@URL(message = "logo必须是一个合法的url地址")
+	@URL(message = "logo必须是一个合法的url地址",groups = {UpdateGroup.class})
 	private String logo;
 	/**
 	 * 介绍
@@ -47,6 +51,7 @@ public class BrandEntity implements Serializable {
 	 * 显示状态[0-不显示；1-显示]
 	 */
 	@TableLogic(value = "1",delval = "0")
+	@ListValue(vals={0,1},message = "值只能是0，1",groups = {AddGroup.class})
 	private Integer showStatus;
 	/**
 	 * 检索首字母

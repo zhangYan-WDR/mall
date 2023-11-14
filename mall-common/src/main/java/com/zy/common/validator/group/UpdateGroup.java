@@ -11,7 +11,7 @@ package com.zy.common.validator.group;
 /**
  * 更新数据 Group
  *
- * @author Mark sunlightcs@gmail.com
+ * @author zhangyan zhangyan080817@gmail.com
  */
 
 public interface UpdateGroup {
